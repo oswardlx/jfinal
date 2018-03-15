@@ -2,11 +2,13 @@ package com.dao;
 
 import com.entity.StageInfo;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDao {
+public class TicketDao extends Model<TicketDao> {
+    public static final TicketDao dao = new TicketDao();
     public void saveTicketDao(List<StageInfo> list) {
         System.out.println(list.get(0).toString());
         if (list.size() > 0) {
@@ -24,8 +26,10 @@ public class TicketDao {
                     throw new RuntimeException("paramlist为空");
                 }
                 appendsql = listToString(paramList, ',');
-                String sql = "INSERT INTO tickes_base (bigball1,bigball2,bigball3,bigball4,bigball5,bigball6,smallball) VALUES " + appendsql;
-
+                String sql = "INSERT INTO tickes_base (bigball1,bigball2,bigball3,bigball4,bigball5,bigball6,smallball,year_month_id) VALUES " + appendsql;
+                System.out.println(sql);
+//                TicketDao.dao.find(sql);
+                Db.update(sql);
             } catch (Throwable t) {
                 t.printStackTrace();
                 throw new RuntimeException("数据库操作失败");

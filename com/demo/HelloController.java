@@ -22,30 +22,7 @@ public class HelloController extends Controller {
         Log log = log4jLogFactory.getLog(HelloController.class);
         log.debug("12313213");
         UploadFile file =getFile("file");//获取文件
-//        try {
-//            System.out.println(file.getContentType());
-//            System.out.println(file.getFileName());
-//            System.out.println(file.getOriginalFileName());
-//            System.out.println(file.getParameterName());
-//            System.out.println(file.getUploadPath());
-//            String filename = file.getFileName();
-//            String filetype1 = filename.substring(filename.length() - 3, filename.length());
-//            String filetype2 = filename.substring(filename.length() - 4, filename.length());
-//            File filedele = new File(file.getUploadPath() + "\\" + file.getFileName());
-
-//            if (!filetype1.equals("xls") && !filetype2.equals("xlsx")) {
-//                filedele.delete();
-//                setAttr("success", false);
-//                setAttr("info", "请传入excel。");
-//                renderJson();
-//                return;
-//            }
-//        }catch (Exception e ){
-//            setAttr("success", false);
-//            setAttr("info", "上传文件失败，请确认是否为.xls,.xlsx格式。");
-//            renderJson();
-//            return;
-//        }
+//        String year_month_id = getPara("year_month_id");
         TicketService ts = new TicketService();
 //        File filedele2 = new File(file.getUploadPath() + "\\" + file.getFileName());
         //1.判断是否传入文件。之后需要研究传入的格式，和确认研究。
@@ -74,6 +51,8 @@ public class HelloController extends Controller {
                 System.out.println(siList);
 //                filedele2.delete();
                 flage = ts.saveTicketList(siList);
+                setAttr("success", true);
+                setAttr("info", "程序执行完了，至于存没存进去还真不知道。");
             } catch (Exception e) {
                 e.printStackTrace();
                 String exceppMessage = e.getMessage();

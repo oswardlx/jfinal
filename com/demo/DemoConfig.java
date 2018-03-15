@@ -3,11 +3,14 @@ package com.demo;
 
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.log.Log4jLogFactory;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
 import java.io.InputStream;
@@ -17,6 +20,7 @@ public class DemoConfig extends JFinalConfig {
     private  Log log = log4jLogFactory.getLog(DemoConfig.class);
     public void configConstant(Constants me) {
         try {
+            me.setDevMode(true);
 //            String path = this.getClass().getResourceAsStream("/jdbc.properties");
 //            loadPropertyFile("/classes/jdbc.properties");
             PropKit.use("jdbc.properties");
@@ -31,6 +35,7 @@ public class DemoConfig extends JFinalConfig {
         log.debug("1312312");
         me.add("/hello",HelloController.class);
         me.add("/demo",Demo.class);
+        me.add("/getlist",GetList.class);
     }
 
 
@@ -40,7 +45,11 @@ public class DemoConfig extends JFinalConfig {
 
 
     public void configPlugin(Plugins me) {
-
+        DruidPlugin druidPlugin = new DruidPlugin("jdbc:mysql://10.10.6.133:3306/tickes","root","123456");
+        me.add(druidPlugin);
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+        me.add(arp);
+        arp.addMapping("tickes_base","id",Tickes.class);
     }
 
 
