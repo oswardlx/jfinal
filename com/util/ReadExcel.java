@@ -57,7 +57,7 @@ public class ReadExcel {
                 System.out.println(totalCells);
                 System.out.println("56");
                 StageInfo si = new StageInfo();
-                List<Integer> bigballTempList = new ArrayList<>();
+                List<String> bigballTempList = new ArrayList<>();
                 for (short c = 0; c <= totalCells - 1; c++) {
                     Cell cell = hssfRow.getCell(c);
                     if (cell != null) {
@@ -87,16 +87,19 @@ public class ReadExcel {
         }
         return rowindex;
     }
-    private  int getHValue(Cell hssfCell) {
+    private  String getHValue(Cell hssfCell) {
         int cellType = hssfCell.getCellType();
         if (cellType == hssfCell.CELL_TYPE_NUMERIC){
             int cellValue = 0;
             DecimalFormat df = new DecimalFormat("#.######");
             String cellDoublevalue = df.format(hssfCell.getNumericCellValue());//去科学计数
-            cellValue = Integer.parseInt(cellDoublevalue);
+//            cellValue = Integer.parseInt(cellDoublevalue);
+            return cellDoublevalue;
+        }else if(cellType == hssfCell.CELL_TYPE_STRING){
+            String cellValue = hssfCell.getStringCellValue().trim();
             return cellValue;
         }
-        return 0;
+        return "0";
     }
     private  int ridpoint(String index) {
         try {
