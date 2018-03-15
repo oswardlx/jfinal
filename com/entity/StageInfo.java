@@ -21,4 +21,12 @@ public class StageInfo {
     public void setSmallBall(int smallBall) {
         this.smallBall = smallBall;
     }
+
+    @Override
+    public String toString() {
+        return "StageInfo{" +
+                "bigBallList=" + bigBallList +
+                ", smallBall=" + smallBall +
+                '}';
+    }
 }

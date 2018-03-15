@@ -70,6 +70,8 @@ public class HelloController extends Controller {
             try {
                 ReadExcel re = new ReadExcel();
                 siList = re.toReadExcel(fis, file1);
+                System.out.println("73");
+                System.out.println(siList);
 //                filedele2.delete();
                 flage = ts.saveTicketList(siList);
             } catch (Exception e) {

@@ -45,16 +45,22 @@ public class ReadExcel {
         //获取工作表
         Sheet sheet = hssfWorkbook.getSheetAt(0);
         totalRows = gainTotalRows(sheet);
+        System.out.println("48");
+        System.out.println(totalRows);
+        System.out.println("48");
         ArrayList<StageInfo> stageList = new ArrayList<>();
         for (int rowNum = 1; rowNum <= totalRows; rowNum++) {
             Row hssfRow = sheet.getRow(rowNum);
             if (hssfRow != null) {
                 totalCells = hssfRow.getLastCellNum();
+                System.out.println("56");
+                System.out.println(totalCells);
+                System.out.println("56");
                 StageInfo si = new StageInfo();
                 List<Integer> bigballTempList = new ArrayList<>();
                 for (short c = 0; c <= totalCells - 1; c++) {
                     Cell cell = hssfRow.getCell(c);
-                    if (cell == null) {
+                    if (cell != null) {
                         if(c<totalCells-1) {
                             bigballTempList.add(getHValue(cell));
                             continue;

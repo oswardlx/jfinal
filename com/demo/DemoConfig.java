@@ -1,9 +1,13 @@
 package com.demo;
 
+
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.log.Log4jLogFactory;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.template.Engine;
 
 import java.io.InputStream;
@@ -14,9 +18,10 @@ public class DemoConfig extends JFinalConfig {
     public void configConstant(Constants me) {
         try {
 //            String path = this.getClass().getResourceAsStream("/jdbc.properties");
-            loadPropertyFile("jdbc.properties");
-            me.setDevMode(getPropertyToBoolean("devMode", false).booleanValue());
-            me.setMaxPostSize(1024*1024*1024);
+//            loadPropertyFile("/classes/jdbc.properties");
+            PropKit.use("jdbc.properties");
+//            me.setDevMode(getPropertyToBoolean("devMode", false).booleanValue());
+//            me.setMaxPostSize(1024*1024*1024);
         } catch (Exception e) {
             e.printStackTrace();
             throw new Error("加载常量（configConstant）出错，请解决问题后重新启动tomcat！！！");
@@ -25,6 +30,7 @@ public class DemoConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         log.debug("1312312");
         me.add("/hello",HelloController.class);
+        me.add("/demo",Demo.class);
     }
 
 
