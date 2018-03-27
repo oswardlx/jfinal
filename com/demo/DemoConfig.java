@@ -3,15 +3,13 @@ package com.demo;
 
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
-import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.log.Log4jLogFactory;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
-import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
+import com.controller.SmallBallAnalyController;
 
 import java.io.InputStream;
 
@@ -36,6 +34,8 @@ public class DemoConfig extends JFinalConfig {
         me.add("/hello",HelloController.class);
         me.add("/demo",Demo.class);
         me.add("/getlist",GetList.class);
+        me.add("/add_a_tick",AddATick.class);
+        me.add("/get_smallball_analy",SmallBallAnalyController.class);
     }
 
 
