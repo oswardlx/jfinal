@@ -91,6 +91,7 @@ public class SmallBallAly {
     }
 
 
+
     public boolean group_analy_bol(String[] sixteen_list_arr, String[] recent_list_arr) {
         int[] int_arr1 = new int[sixteen_list_arr.length / 2];
         int[] int_arr2 = new int[sixteen_list_arr.length / 2];
@@ -129,6 +130,9 @@ public class SmallBallAly {
         }
         return x1<y1?true:false;
     }
+
+
+
     //分组分析
     public String group_analy(String sixteen_list, String recent_list) {
         String[] recent_list_arr = rep_space_spit(recent_list);
