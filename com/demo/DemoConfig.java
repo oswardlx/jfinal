@@ -1,6 +1,7 @@
 package com.demo;
 
 
+import com.controller.GetBallListController;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.PropKit;
@@ -36,6 +37,7 @@ public class DemoConfig extends JFinalConfig {
         me.add("/getlist",GetList.class);
         me.add("/add_a_tick",AddATick.class);
         me.add("/get_smallball_analy",SmallBallAnalyController.class);
+        me.add("/get_ball_list",GetBallListController.class);
     }
 
 

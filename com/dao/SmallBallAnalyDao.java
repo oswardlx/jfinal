@@ -6,6 +6,7 @@ import com.entity.SmallBallSort;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+import java.net.StandardSocketOptions;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class SmallBallAnalyDao {
                 "\ta;";
         System.out.println(sql);
         List<Record> sixteen_list = Db.find(sql);
+        System.out.println("111111111111");
         List<SmallBallSort> sbs_list = new ArrayList<>();
         for (Record re : sixteen_list) {
             System.out.println(re.toString());
