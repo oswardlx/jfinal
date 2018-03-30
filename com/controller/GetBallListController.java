@@ -7,7 +7,11 @@ public class GetBallListController extends Controller {
     public void index(){
         int mount = getParaToInt("mount");
         SmallBallAnalyService sbas = new SmallBallAnalyService(mount);
-        sbas.get_smallball_list();
-
+        int x =0;
+        for(String str :sbas.get_smallball_list()){
+            setAttr("result"+x,str);
+            x++;
+        }
+        renderJson();
     }
 }

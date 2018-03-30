@@ -1,6 +1,10 @@
 package com.util;
 
 import javax.net.ssl.SSLContext;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class SmallBallAly {
 
@@ -169,4 +173,43 @@ public class SmallBallAly {
     public String average_side_analy(String recent_list) {
         return average_side_analy(rep_space_spit(recent_list));
     }
+    public Set<Integer> get_same_num(int[] a, int[] b){
+        Set<Integer> list = new HashSet<>();
+        int i=0,j=0;
+        while(i<a.length&&j<b.length){
+            if(a[i]==b[j]){
+                list.add(a[i++]);
+            }else if(a[i]<b[j]){
+                i++;
+            }else{
+                j++;
+            }
+        }
+        return list;
+    }
+    public int[] Integer_to_int(Integer[] a){
+        int[] result = new int[a.length];
+        for(int i =0;i<result.length;i++){
+            result[i]=a[i];
+        }
+        return result;
+    }
+    public String[] Integer_to_String(Integer[] a){
+        String[] result = new String[a.length];
+        for(int i =0;i<result.length;i++){
+            result[i]=String.valueOf(a[i]);
+        }
+        return result;
+    }
+    public String[] Set_to_String(Set<Integer> a){
+        String[] result = new String[a.size()];
+        int i=0;
+        for(Integer index:a){
+            result[i]=String.valueOf(index);
+            i++;
+        }
+        return result;
+    }
+
+
 }

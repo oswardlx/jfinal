@@ -4,8 +4,12 @@ import com.dao.SmallBallAnalyDao;
 import com.entity.RecentNum;
 import com.entity.SmallBallSort;
 import com.util.SmallBallAly;
+import com.util.SortUtil;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class SmallBallAnalyService {
     private String[] sixteen_arr ;
@@ -42,20 +46,32 @@ public class SmallBallAnalyService {
         SmallBallAly sba = new SmallBallAly();
         boolean parity_flag = sba.parity_analy_bol(recent_arr);
         int[] arr_parity = get_parity_arr(sixteen_arr,parity_flag);
+        SortUtil su = new SortUtil();
+        su.quicksort(arr_parity);
         System.out.println("print_arr_parity");
         print_arr(arr_parity);
         System.out.println("print_arr_parity");
         boolean group_flag = sba.group_analy_bol(sixteen_arr, recent_arr);
         int[] arr_group  = get_group_arr(sixteen_arr,group_flag);
+        su.quicksort(arr_group);
         System.out.println("print_arr_group");
         print_arr(arr_group);
         System.out.println("print_arr_group");
         boolean average_flag = sba.average_side_analy_bol(recent_arr);
         int[] arr_average = get_average_arr(sixteen_arr,average_flag);
+        su.quicksort(arr_average);
         System.out.println("print_arr_average");
         print_arr(arr_average);
         System.out.println("print_arr_average");
-        return null;
+        Set<Integer> set1 = sba.get_same_num(arr_parity,arr_group);
+        for(int j :set1){
+            System.out.println(j);
+        }
+        Integer[] temp=set1.toArray(new Integer[set1.size()]);
+        Set<Integer> set2 = sba.get_same_num(arr_average,sba.Integer_to_int(temp));
+
+
+        return sba.Set_to_String(set2);
     }
 
     //获取奇/偶数组   flag==true 奇数
