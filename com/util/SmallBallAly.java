@@ -1,10 +1,7 @@
 package com.util;
 
 import javax.net.ssl.SSLContext;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SmallBallAly {
 
@@ -28,6 +25,22 @@ public class SmallBallAly {
             }
         }
         return "odd:" + odd + ",even:" + even;
+    }
+    public Map<String,Integer> parity_analy_map(String[] recent){
+        Map<String,Integer> map = new HashMap<>();
+        int even = 0;
+        int odd = 0;
+        for (String str2 : recent) {
+            if (Integer.parseInt(str2) % 2 == 0) {
+                even++;
+            } else {
+                odd++;
+            }
+        }
+        map.put("even",even);
+        map.put("odd",odd);
+        return map;
+
     }
     public boolean parity_analy_bol(String[] recent){
         int even = 0;
@@ -156,6 +169,20 @@ public class SmallBallAly {
             }
         }
         return "upper:" + x + ",lower:" + y;
+    }
+    public Map<String,Integer> average_side_analy_map(String[] recent_list_arr) {
+        Map<String,Integer> map = new HashMap<>();
+        int x = 0, y = 0;
+        for (String str_temp : recent_list_arr) {
+            if (Integer.parseInt(str_temp) > 8) {
+                x++;
+            } else {
+                y++;
+            }
+        }
+        map.put("upper",x);
+        map.put("lower",y);
+        return map;
     }
 
     public boolean average_side_analy_bol(String[] recent_list_arr) {

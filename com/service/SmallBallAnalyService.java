@@ -7,6 +7,7 @@ import com.util.SmallBallAly;
 import com.util.SortUtil;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class SmallBallAnalyService {
@@ -39,6 +40,16 @@ public class SmallBallAnalyService {
         return result;
     }
 
+    public Map<String,Integer> get_sixteen_map(){
+        SmallBallAly sba = new SmallBallAly();
+        Map<String,Integer> parity_str_map = sba.parity_analy_map(recent_arr);
+        parity_str_map.putAll(sba.average_side_analy_map(recent_arr));
+        Set<Map.Entry<String,Integer>> entrySet = parity_str_map.entrySet();
+        for(Map.Entry<String,Integer> e:entrySet){
+            System.out.println(e.getKey()+":"+e.getValue());
+        }
+        return parity_str_map;
+    }
     //获取smallball推荐结果
     public String[] get_smallball_list() {
         SmallBallAly sba = new SmallBallAly();
@@ -49,27 +60,27 @@ public class SmallBallAnalyService {
         System.out.println("print_arr_parity");
         print_arr(arr_parity);
         System.out.println("print_arr_parity");
-        boolean group_flag = sba.group_analy_bol(sixteen_arr, recent_arr);
-        int[] arr_group  = get_group_arr(sixteen_arr,group_flag);
-        su.quicksort(arr_group);
-        System.out.println("print_arr_group");
-        print_arr(arr_group);
-        System.out.println("print_arr_group");
+//        boolean group_flag = sba.group_analy_bol(sixteen_arr, recent_arr);
+//        int[] arr_group  = get_group_arr(sixteen_arr,group_flag);
+//        su.quicksort(arr_group);
+//        System.out.println("print_arr_group");
+//        print_arr(arr_group);
+//        System.out.println("print_arr_group");
         boolean average_flag = sba.average_side_analy_bol(recent_arr);
         int[] arr_average = get_average_arr(sixteen_arr,average_flag);
         su.quicksort(arr_average);
         System.out.println("print_arr_average");
         print_arr(arr_average);
         System.out.println("print_arr_average");
-        Set<Integer> set1 = sba.get_same_num(arr_parity,arr_group);
+        Set<Integer> set1 = sba.get_same_num(arr_parity,arr_average);
         for(int j :set1){
             System.out.println(j);
         }
-        Integer[] temp=set1.toArray(new Integer[set1.size()]);
-        Set<Integer> set2 = sba.get_same_num(arr_average,sba.Integer_to_int(temp));
+//        Integer[] temp=set1.toArray(new Integer[set1.size()]);
+//        Set<Integer> set2 = sba.get_same_num(arr_average,sba.Integer_to_int(temp));
 
 
-        return sba.Set_to_String(set2);
+        return sba.Set_to_String(set1);
     }
 
     //获取奇/偶数组   flag==true 奇数
