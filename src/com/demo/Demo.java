@@ -1,4 +1,4 @@
-package com.demo;
+package src.com.demo;
 
 import com.jfinal.core.Controller;
 

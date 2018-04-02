@@ -1,24 +1,24 @@
-package com.entity;
+package src.com.entity;
 
 import java.util.List;
 
 public class StageInfo {
-    private List<Integer> bigBallList;
-    private int smallBall;
+    private List<String> bigBallList;
+    private String smallBall;
 
-    public List<Integer> getBigBallList() {
+    public List<String> getBigBallList() {
         return bigBallList;
     }
 
-    public void setBigBallList(List<Integer> bigBallList) {
+    public void setBigBallList(List<String> bigBallList) {
         this.bigBallList = bigBallList;
     }
 
-    public int getSmallBall() {
+    public String getSmallBall() {
         return smallBall;
     }
 
-    public void setSmallBall(int smallBall) {
+    public void setSmallBall(String smallBall) {
         this.smallBall = smallBall;
     }
 

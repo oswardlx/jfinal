@@ -1,6 +1,6 @@
-package com.test;
+package src.com.test;
 
-import com.util.SmallBallAly;
+import src.com.util.SmallBallAly;
 
 public class demo1 {
     public static void main(String[] args){
@@ -52,11 +52,27 @@ public class demo1 {
                 "6\n" +
                 "11\n" +
                 "4\n" +
-                "16\n";
-        sba.setSixteen_sort(sixteen);
-        sba.setRecent_balls(recent);
+                "16\n" +
+                "4\n" +
+                "5\n" +
+                "16\n" +
+                "5\n" +
+                "16\n" +
+                "8\n" +
+                "13\n" +
+                "12\n" +
+                "14\n" +
+                "10\n" +
+                "12\n" +
+                "9\n" +
+                "14\n" +
+                "6\n" +
+                "5\n" +
+                "8\n";
+
         System.out.println(sba.parity_analy(recent));
-        System.out.println(sba.group_analy(sixteen,recent));
+        System.out.println(sba.group_analy(sba.rep_space_spit(sixteen),sba.rep_space_spit(recent)));
+        System.out.println(sba.average_side_analy(recent));
 
     }
 }

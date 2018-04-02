@@ -1,25 +1,28 @@
-package com.demo;
+package src.com.demo;
 
 
+import src.com.controller.GetBallListController;
+import src.com.controller.SmallBallAnalyController;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Log;
 import com.jfinal.log.Log4jLogFactory;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
 import java.io.InputStream;
 
 public class DemoConfig extends JFinalConfig {
     private Log4jLogFactory log4jLogFactory = new Log4jLogFactory();
-    private  Log log = log4jLogFactory.getLog(DemoConfig.class);
+    private Log log = log4jLogFactory.getLog(DemoConfig.class);
     public void configConstant(Constants me) {
         try {
+            me.setDevMode(true);
 //            String path = this.getClass().getResourceAsStream("/jdbc.properties");
 //            loadPropertyFile("/classes/jdbc.properties");
-            PropKit.use("jdbc.properties");
+            PropKit.use("src/jdbc.properties");
 //            me.setDevMode(getPropertyToBoolean("devMode", false).booleanValue());
 //            me.setMaxPostSize(1024*1024*1024);
         } catch (Exception e) {
@@ -31,6 +34,10 @@ public class DemoConfig extends JFinalConfig {
         log.debug("1312312");
         me.add("/hello",HelloController.class);
         me.add("/demo",Demo.class);
+        me.add("/getlist",GetList.class);
+        me.add("/add_a_tick",AddATick.class);
+        me.add("/get_smallball_analy",SmallBallAnalyController.class);
+        me.add("/get_ball_list",GetBallListController.class);
     }
 
 
@@ -40,7 +47,11 @@ public class DemoConfig extends JFinalConfig {
 
 
     public void configPlugin(Plugins me) {
-
+        DruidPlugin druidPlugin = new DruidPlugin("jdbc:mysql://10.10.6.133:3306/tickes","root","123456");
+        me.add(druidPlugin);
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+        me.add(arp);
+        arp.addMapping("tickes_base","id",Tickes.class);
     }
 
 
@@ -54,7 +65,7 @@ public class DemoConfig extends JFinalConfig {
     }
 
     public static void main(String[] args) {
-        InputStream resourceAsStream = DemoConfig.class.getResourceAsStream("/jdbc.properties");
+        InputStream resourceAsStream = DemoConfig.class.getResourceAsStream("/src/jdbc.properties");
 
         System.out.println(resourceAsStream);
     }

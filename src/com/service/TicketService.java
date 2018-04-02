@@ -1,7 +1,7 @@
-package com.service;
+package src.com.service;
 
-import com.dao.TicketDao;
-import com.entity.StageInfo;
+import src.com.dao.TicketDao;
+import src.com.entity.StageInfo;
 
 import java.util.ArrayList;
 import java.util.List;
