@@ -19,7 +19,6 @@ public class SmallBallAnalyService {
         SmallBallAnalyDao dao = new SmallBallAnalyDao();
         List<SmallBallSort> sbs_list = dao.get_sixteen();
         sixteen_arr = new String[sbs_list.size()];
-        System.out.println(sbs_list.size());
         List<RecentNum> rn_list = dao.get_recent_num(mount);
         recent_arr = new String[rn_list.size()];
         for (int i = 0; i < sbs_list.size(); i++) {
@@ -45,9 +44,6 @@ public class SmallBallAnalyService {
         Map<String,Integer> parity_str_map = sba.parity_analy_map(recent_arr);
         parity_str_map.putAll(sba.average_side_analy_map(recent_arr));
         Set<Map.Entry<String,Integer>> entrySet = parity_str_map.entrySet();
-        for(Map.Entry<String,Integer> e:entrySet){
-            System.out.println(e.getKey()+":"+e.getValue());
-        }
         return parity_str_map;
     }
     //获取smallball推荐结果
@@ -57,29 +53,10 @@ public class SmallBallAnalyService {
         int[] arr_parity = get_parity_arr(sixteen_arr,parity_flag);
         SortUtil su = new SortUtil();
         su.quicksort(arr_parity);
-        System.out.println("print_arr_parity");
-        print_arr(arr_parity);
-        System.out.println("print_arr_parity");
-//        boolean group_flag = sba.group_analy_bol(sixteen_arr, recent_arr);
-//        int[] arr_group  = get_group_arr(sixteen_arr,group_flag);
-//        su.quicksort(arr_group);
-//        System.out.println("print_arr_group");
-//        print_arr(arr_group);
-//        System.out.println("print_arr_group");
         boolean average_flag = sba.average_side_analy_bol(recent_arr);
         int[] arr_average = get_average_arr(sixteen_arr,average_flag);
         su.quicksort(arr_average);
-        System.out.println("print_arr_average");
-        print_arr(arr_average);
-        System.out.println("print_arr_average");
         Set<Integer> set1 = sba.get_same_num(arr_parity,arr_average);
-        for(int j :set1){
-            System.out.println(j);
-        }
-//        Integer[] temp=set1.toArray(new Integer[set1.size()]);
-//        Set<Integer> set2 = sba.get_same_num(arr_average,sba.Integer_to_int(temp));
-
-
         return sba.Set_to_String(set1);
     }
 
@@ -125,14 +102,11 @@ public class SmallBallAnalyService {
     private int[] get_average_arr(String[] str_arr,boolean flag){
         int[] int_arr1 = new int[str_arr.length / 2];
         int[] int_arr2 = new int[str_arr.length / 2];
-        System.out.println("11111:"+str_arr.length);
         for(int i = 0,k=0,j=0;i<str_arr.length;i++){
             if(Integer.parseInt(str_arr[i])<=8){
-                System.out.println("little:"+str_arr[i]);
                 int_arr1[k] = Integer.parseInt(str_arr[i]);
                 k++;
             }else{
-                System.out.println("bigger:"+str_arr[i]);
                 int_arr2[j] = Integer.parseInt(str_arr[i]);
                 j++;
             }

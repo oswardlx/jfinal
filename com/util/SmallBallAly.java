@@ -82,9 +82,6 @@ public class SmallBallAly {
         }
         int x1 = 0;
         int y1 = 0;
-        for(int index_temp :int_arr1){
-            System.out.println(index_temp);
-        }
         for (String str2 : recent_list_arr) {
             boolean flag = true;
             for (int index : int_arr1) {

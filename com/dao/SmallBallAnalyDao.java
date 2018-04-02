@@ -22,16 +22,12 @@ public class SmallBallAnalyDao {
                 "\tsmallball\n" +
                 "ORDER BY\n" +
                 "\ta;";
-        System.out.println(sql);
         List<Record> sixteen_list = Db.find(sql);
-        System.out.println("111111111111");
         List<SmallBallSort> sbs_list = new ArrayList<>();
         for (Record re : sixteen_list) {
-            System.out.println(re.toString());
             SmallBallSort sbs = new SmallBallSort();
             sbs.setRanking(re.getInt("a"));
             sbs.setNum(re.getInt("smallball"));
-            System.out.println(sbs.toString());
             sbs_list.add(sbs);
         }
         return sbs_list;
