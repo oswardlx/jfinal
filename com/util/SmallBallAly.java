@@ -16,7 +16,7 @@ public class SmallBallAly {
     //奇偶性分析
     public String parity_analy(String[] recent) {
         int even = 0;
-        int odd = 0;
+        int odd = 0 ;
         for (String str2 : recent) {
             if (Integer.parseInt(str2) % 2 == 0) {
                 even++;
