@@ -42,7 +42,7 @@ public class SmallBallAly {
         return map;
 
     }
-    public boolean parity_analy_bol(String[] recent){
+    public int parity_analy_bol(String[] recent){
         int even = 0;
         int odd = 0;
         for (String str2 : recent) {
@@ -52,7 +52,12 @@ public class SmallBallAly {
                 odd++;
             }
         }
-        return odd<even?true:false;
+        if(odd<even){
+            return 1;
+        }else if(odd>even) {
+            return 2;
+        }
+            return 0;
     }
 
 
@@ -182,7 +187,7 @@ public class SmallBallAly {
         return map;
     }
 
-    public boolean average_side_analy_bol(String[] recent_list_arr) {
+    public int average_side_analy_bol(String[] recent_list_arr) {
         int x = 0, y = 0;
         for (String str_temp : recent_list_arr) {
             if (Integer.parseInt(str_temp) > 8) {
@@ -191,7 +196,13 @@ public class SmallBallAly {
                 y++;
             }
         }
-        return x>y?true:false;
+        if(x<y){
+            return 2;
+        }else if(x>y) {
+            return 1;
+        }
+        return 0;
+//        return x>y?true:false;
     }
 
     public String average_side_analy(String recent_list) {

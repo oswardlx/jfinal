@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class SmallBallAnalyService {
-    private String[] sixteen_arr ;
+    private String[] sixteen_arr;
     private String[] recent_arr;
 
     //初始化sixteen_arr,recent_arr
@@ -39,45 +39,53 @@ public class SmallBallAnalyService {
         return result;
     }
 
-    public Map<String,Integer> get_sixteen_map(){
+    public Map<String, Integer> get_sixteen_map() {
         SmallBallAly sba = new SmallBallAly();
-        Map<String,Integer> parity_str_map = sba.parity_analy_map(recent_arr);
+        Map<String, Integer> parity_str_map = sba.parity_analy_map(recent_arr);
         parity_str_map.putAll(sba.average_side_analy_map(recent_arr));
-        Set<Map.Entry<String,Integer>> entrySet = parity_str_map.entrySet();
         return parity_str_map;
     }
+
     //获取smallball推荐结果
     public String[] get_smallball_list() {
-        SmallBallAly sba = new SmallBallAly();
-        boolean parity_flag = sba.parity_analy_bol(recent_arr);
-        int[] arr_parity = get_parity_arr(sixteen_arr,parity_flag);
-        SortUtil su = new SortUtil();
-        su.quicksort(arr_parity);
-        boolean average_flag = sba.average_side_analy_bol(recent_arr);
-        int[] arr_average = get_average_arr(sixteen_arr,average_flag);
-        su.quicksort(arr_average);
-        Set<Integer> set1 = sba.get_same_num(arr_parity,arr_average);
-        return sba.Set_to_String(set1);
+        try {
+            SmallBallAly sba = new SmallBallAly();
+            int parity_flag = sba.parity_analy_bol(recent_arr);
+            int average_flag = sba.average_side_analy_bol(recent_arr);
+            int[] arr_parity = get_parity_arr(sixteen_arr, parity_flag);
+            int[] arr_average = get_average_arr(sixteen_arr, average_flag);
+            SortUtil su = new SortUtil();
+            su.quicksort(arr_parity);
+            su.quicksort(arr_average);
+            Set<Integer> set1 = sba.get_same_num(arr_parity, arr_average);
+            return sba.Set_to_String(set1);
+        }catch (RuntimeException re){
+            return new String[]{"-1"};
+        }
     }
 
     //获取奇/偶数组   flag==true 奇数
-    private int[] get_parity_arr(String[] str_arr, boolean flag) {
+    private int[] get_parity_arr(String[] str_arr, int flag) {
+        if (flag == 0) {
+
+            throw new RuntimeException("flag=0");
+        }
         int[] arr_parity = new int[str_arr.length / 2];
         for (int i = 0, j = 0; i < str_arr.length; i++) {
-                if (flag&&Integer.parseInt(str_arr[i]) % 2 != 0) {
-                    arr_parity[j] = Integer.parseInt(str_arr[i]);
-                    j++;
-                }
-                if (!flag&&Integer.parseInt(str_arr[i]) % 2 == 0) {
-                    arr_parity[j] = Integer.parseInt(str_arr[i]);
-                    j++;
-                }
+            if (flag == 1 && Integer.parseInt(str_arr[i]) % 2 != 0) {
+                arr_parity[j] = Integer.parseInt(str_arr[i]);
+                j++;
+            }
+            if (flag == 2 && Integer.parseInt(str_arr[i]) % 2 == 0) {
+                arr_parity[j] = Integer.parseInt(str_arr[i]);
+                j++;
+            }
         }
         return arr_parity;
     }
 
     //获取分组数组   flag==true 返回第一组
-    private int[] get_group_arr(String[] str_arr,boolean flag) {
+    private int[] get_group_arr(String[] str_arr, boolean flag) {
         int[] int_arr1 = new int[str_arr.length / 2];
         int[] int_arr2 = new int[str_arr.length / 2];
         //分成两组第一个与最后一个绑定。以此类推。十指相扣分开成两组。
@@ -98,28 +106,33 @@ public class SmallBallAnalyService {
         return int_arr2;
     }
 
-    //获取平均数分析数组  true 小于等于8
-    private int[] get_average_arr(String[] str_arr,boolean flag){
+    //获取平均数分析数组  1 小于等于8，2大于8
+    private int[] get_average_arr(String[] str_arr, int flag) {
+        if (flag == 0) {
+            throw new RuntimeException("flag=0");
+        }
         int[] int_arr1 = new int[str_arr.length / 2];
         int[] int_arr2 = new int[str_arr.length / 2];
-        for(int i = 0,k=0,j=0;i<str_arr.length;i++){
-            if(Integer.parseInt(str_arr[i])<=8){
+        for (int i = 0, k = 0, j = 0; i < str_arr.length; i++) {
+            if (Integer.parseInt(str_arr[i]) <= 8) {
                 int_arr1[k] = Integer.parseInt(str_arr[i]);
                 k++;
-            }else{
+            } else {
                 int_arr2[j] = Integer.parseInt(str_arr[i]);
                 j++;
             }
         }
-        if(flag){
+        if (flag == 1) {
             return int_arr1;
+        } else if (flag == 2) {
+            return int_arr2;
         }
-        return int_arr2;
+        return null;
     }
 
     //遍历输出数组里的数
-    private void print_arr(int[] arr){
-        for(int x :arr){
+    private void print_arr(int[] arr) {
+        for (int x : arr) {
             System.out.println(x);
         }
     }

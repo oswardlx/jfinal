@@ -5,6 +5,7 @@ import com.service.SmallBallAnalyService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class GetBallListController extends Controller {
     public void index() {
@@ -17,8 +18,9 @@ public class GetBallListController extends Controller {
             x++;
         }
         System.out.println("result:1111");
-        for (int i : get_result()) {
-            System.out.println(i);
+        Set<Map.Entry<String,Integer>> entrySet = get_result().entrySet();
+        for ( Map.Entry<String,Integer> e : entrySet) {
+            System.out.println(e.getKey()+":"+e.getValue());
         }
         System.out.println("result:2222");
         Map<String, Object> map2 = new HashMap<>();
@@ -27,22 +29,30 @@ public class GetBallListController extends Controller {
         renderJson(map2);
     }
 
-    private static int[] get_result() {
-        int a1 = 0, a2 = 0, a3 = 0, a4 = 0;
-        for (int i = 15; i <= 90; i++) {
+    private static Map<String,Integer> get_result() throws RuntimeException {
+        int a1 = 0, a2 = 0, a3 = 0, a4 = 0,a5=0;
+        Map<String,Integer> map_resutl = new HashMap<>();
+
+        for (int i = 2; i <= 300; i++) {
             SmallBallAnalyService sbas = new SmallBallAnalyService(i);
-            System.out.println("[0]"+sbas.get_smallball_list()[0]);
+            System.out.println("["+i+"]"+sbas.get_smallball_list()[0]);
             if(sbas.get_smallball_list()[0].equals("1")){
                 a1++;
             }else if(sbas.get_smallball_list()[0].equals("2")){
                 a2++;
-            }else if(sbas.get_smallball_list()[0].equals("8")){
+            }else if(sbas.get_smallball_list()[0].equals("9")){
                 a3++;
             }else if(sbas.get_smallball_list()[0].equals("16")){
                 a4++;
+            }else if(sbas.get_smallball_list()[0].equals("-1")){
+                a5++;
             }
         }
-        int[] result = new int[]{a1, a2, a3, a4};
-        return result;
+        map_resutl.put("a1",a1);
+        map_resutl.put("a2",a2);
+        map_resutl.put("a3",a3);
+        map_resutl.put("a4",a4);
+        map_resutl.put("a5",a5);
+        return map_resutl;
     }
 }
